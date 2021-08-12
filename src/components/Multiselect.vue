@@ -1,13 +1,11 @@
 <template>
-  <div class="multiselect" :class="selectStyle">
+  <div class="multiselect" :class="selectStyle" ref="select">
     <input
       class="multiselect__input opacity-0 cursor-default"
       :class="inputStyle"
-      @blur="onBlur"
       @click="openOptions"
       @input="inputChange"
       ref="input"
-      v-scroll-stop
     />
     <div dir="auto" class="multiselect__tags">
       <input
@@ -55,13 +53,7 @@
       <MyIcon name="arrow-down" class="w-8 h-8 me-5" />
     </div>
 
-    <div
-      v-if="openSelect"
-      class="multiselect__options"
-      @mouseover="optionClicked = true"
-      @mouseenter="optionClicked = true"
-      @mouseleave="optionClicked = false"
-    >
+    <div v-if="openSelect" class="multiselect__options">
       <div
         dir="auto"
         v-for="(option, i) in remainOptions"
@@ -91,7 +83,6 @@ export default Vue.extend({
   data() {
     return {
       openSelect: false,
-      optionClicked: false,
     };
   },
   props: {
@@ -155,13 +146,24 @@ export default Vue.extend({
         this.value.filter((v) => v != this.getOptionValue(option))
       );
     },
-    onBlur() {
-      if (!this.optionClicked) this.openSelect = false;
-      this.optionClicked = false;
-    },
     inputChange(e: any) {
       e.target.value = "";
     },
+    clickOutside(e: any){
+			if (!this.openSelect) return
+			if (
+				!(this.$refs.select as any)?.contains(e.target)
+			) {
+				this.openSelect = false
+			}
+		}
+  },
+  mounted() {
+      document.addEventListener("click", this.clickOutside);
+    
+  },
+  destroyed() {
+      document.removeEventListener("click", this.clickOutside);
   },
 });
 </script>

@@ -1,6 +1,6 @@
 {
   "name": "m-multiselect-lib",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "private": false,
   "main": "dist/m-multiselect-lib.common.js",
   "files": [

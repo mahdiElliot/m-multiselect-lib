@@ -1,7 +1,5 @@
 <template>
-  <client-only>
     <component :is="'my-' + name" @click="(e) => $emit('click', e)" />
-  </client-only>
 </template>
 
 <script>
