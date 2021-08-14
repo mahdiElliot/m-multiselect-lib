@@ -3,7 +3,7 @@
 ## installation
 
 ```
-yarn install m-multiselect-lib
+yarn add m-multiselect-lib
 or
 npm install --save-dev m-multiselect-lib
 ```
