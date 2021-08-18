@@ -196,7 +196,7 @@ export default Vue.extend({
   &__tags {
     top: 0;
     bottom: 0;
-    margin: 4px 0 4px 4rem;
+    margin: 4px 0 4px 4px;
     position: absolute;
     z-index: 100;
     overflow-y: auto;
